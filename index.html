@@ -1,0 +1,2694 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OpenScience | Pioneers of AI-Assisted Medicine & Research Methodology</title>
+  <meta name="description" content="Case studies of individuals who used artificial intelligence to diagnose, reverse-engineer, and treat incurable conditions in their loved ones and themselves, and how OpenScience empowers this research." />
+  <link rel="canonical" href="https://www.openscience.sh/" />
+  
+  <!-- Modern Swiss Editorial & Scientific Typography Stack -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Three.js for interactive 3D molecular protein structures -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <style>
+    /* FrontierRSI & OpenScience Aesthetic Foundation */
+    :root {
+      --bg-paper: #f2efe9;
+      --bg-paper-card: #eae6de;
+      --bg-paper-subtle: #f8f6f2;
+      --text-fg: #1e1d1a;
+      --text-dim: #4c4841;
+      --text-mute: #7c776e;
+      --text-faint: #a8a398;
+      --border-line: #ddd7cb;
+      --border-dark: #b8b1a3;
+      --accent-science: #1a6a6e;
+      --accent-science-subtle: rgba(26, 106, 110, 0.08);
+      --accent-science-glow: rgba(26, 106, 110, 0.2);
+      --accent-amber: #5a3d10;
+      --accent-amber-subtle: #fdfaf2;
+      --accent-amber-border: #d4bf94;
+      --accent-ruby: #5c1f3b;
+      --accent-indigo: #272b62;
+      
+      --font-serif: "Newsreader", "Concrete Roman", "Computer Modern", Georgia, serif;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+      
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 14px;
+      --radius-full: 9999px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      background-color: var(--bg-paper);
+      color: var(--text-fg);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Subtle paper noise overlay inspired by FrontierRSI */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.025;
+      background-image: radial-gradient(#000 1px, transparent 1px);
+      background-size: 4px 4px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    /* Container max width following frontierrsi.net 1180px */
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    /* Top Notice Bar */
+    .top-notice-bar {
+      border-bottom: 1px solid var(--border-line);
+      background: var(--bg-paper-card);
+      font-size: 0.8125rem;
+      color: var(--text-dim);
+      padding: 0.5rem 0;
+    }
+    .top-notice-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .notice-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .pulse-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-science);
+      display: inline-block;
+      position: relative;
+    }
+    .pulse-dot::after {
+      content: "";
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 1px solid var(--accent-science);
+      animation: pulse-ring 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+    }
+    @keyframes pulse-ring {
+      0% { transform: scale(0.6); opacity: 1; }
+      100% { transform: scale(2); opacity: 0; }
+    }
+
+    .openscience-link-btn {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      background: var(--text-fg);
+      color: var(--bg-paper);
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: opacity 0.15s ease;
+    }
+    .openscience-link-btn:hover {
+      opacity: 0.85;
+      color: var(--bg-paper);
+    }
+
+    /* Header */
+    header {
+      padding: 3.5rem 0 2rem;
+      border-bottom: 1px solid var(--border-line);
+    }
+    .brand-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .brand-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.05;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: var(--text-fg);
+    }
+    .brand-title span {
+      font-style: italic;
+      color: var(--text-dim);
+    }
+    .header-links {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      color: var(--text-mute);
+    }
+    .header-links a:hover {
+      color: var(--text-fg);
+    }
+
+    .hero-lead-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+      margin-top: 1.5rem;
+    }
+    @media (max-width: 860px) {
+      .hero-lead-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+    .hero-lead-text {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      line-height: 1.55;
+      color: var(--text-fg);
+    }
+    .hero-context-box {
+      font-size: 0.875rem;
+      color: var(--text-dim);
+      background: var(--bg-paper-card);
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      position: relative;
+    }
+    .hero-context-box strong {
+      color: var(--text-fg);
+      font-weight: 600;
+    }
+    .hero-context-box .disclaimer-tag {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-science);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    /* Controls Bar: Pure Category Filters (Confusing 10-Yr-Old toggle removed from here) */
+    .controls-bar {
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border-line);
+      position: sticky;
+      top: 0;
+      background: rgba(242, 239, 233, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    .controls-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .filter-tabs {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .filter-tab {
+      background: transparent;
+      border: 1px solid var(--border-line);
+      padding: 0.45rem 0.95rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .filter-tab:hover {
+      border-color: var(--text-dim);
+      color: var(--text-fg);
+    }
+    .filter-tab.active {
+      background: var(--text-fg);
+      color: var(--bg-paper);
+      border-color: var(--text-fg);
+    }
+
+    .filter-count-note {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-mute);
+    }
+
+    /* Section Subhead */
+    .section-meta-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem 0 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-mute);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-bottom: 1px solid var(--border-line);
+      margin-bottom: 2rem;
+    }
+
+    /* Grid of Pioneer Profiles */
+    .pioneers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 1.75rem;
+      margin-bottom: 4rem;
+    }
+    @media (max-width: 480px) {
+      .pioneers-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Card Component: Ultra-clean, focused, uncluttered */
+    .pioneer-card {
+      background: var(--bg-paper-card);
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+      position: relative;
+    }
+    .pioneer-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-dark);
+      box-shadow: 0 12px 30px -10px rgba(30, 29, 26, 0.08);
+    }
+
+    /* Card Media Area (Moving Image / Visual Switcher) */
+    .card-media-wrapper {
+      position: relative;
+      height: 250px;
+      background: #141311;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border-line);
+    }
+    .media-viewport {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+    .media-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #121110;
+    }
+    .media-slide.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .media-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.96) contrast(1.02);
+    }
+
+    /* Interactive 3D Canvas in slide */
+    .mol-canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+      cursor: grab;
+    }
+    .mol-canvas:active {
+      cursor: grabbing;
+    }
+
+    /* Switcher Pill on Top of Media */
+    .media-switch-controls {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      right: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .media-toggle-pill {
+      pointer-events: auto;
+      background: rgba(20, 19, 17, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(8px);
+      border-radius: var(--radius-full);
+      padding: 3px;
+      display: inline-flex;
+      gap: 3px;
+    }
+    .media-pill-btn {
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.7);
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .media-pill-btn.active {
+      background: rgba(255, 255, 255, 0.95);
+      color: #141311;
+      font-weight: 500;
+    }
+    .mol-hint {
+      pointer-events: auto;
+      background: rgba(20, 19, 17, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      border-radius: var(--radius-full);
+      color: #ddd7cb;
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      padding: 3px 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Card Content: Streamlined and Elegant */
+    .card-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .card-category-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.65rem;
+    }
+    .category-badge {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-science);
+      font-weight: 500;
+    }
+    .status-badge {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-line);
+      background: var(--bg-paper);
+      color: var(--text-dim);
+    }
+
+    .pioneer-names {
+      margin-bottom: 0.35rem;
+    }
+    .pioneer-title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      line-height: 1.2;
+      color: var(--text-fg);
+      font-weight: 400;
+    }
+    .subject-subtitle {
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      color: var(--text-mute);
+      margin-top: 0.15rem;
+    }
+
+    .target-condition {
+      display: inline-block;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--text-dim);
+      margin: 0.5rem 0 0.85rem;
+      line-height: 1.35;
+    }
+
+    .card-overview-text {
+      font-size: 0.875rem;
+      color: var(--text-dim);
+      line-height: 1.55;
+      margin-bottom: 1.15rem;
+      flex: 1;
+    }
+
+    /* Key Tools Badges */
+    .tools-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 1.25rem;
+    }
+    .tool-chip {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      background: var(--bg-paper);
+      border: 1px solid var(--border-line);
+      padding: 2px 7px;
+      border-radius: var(--radius-sm);
+      color: var(--text-dim);
+    }
+
+    /* Card Actions: Scholarly & Clean */
+    .card-footer {
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .dossier-open-btn {
+      background: var(--text-fg);
+      color: var(--bg-paper);
+      border: 1px solid var(--text-fg);
+      border-radius: var(--radius-sm);
+      padding: 0.5rem 0.95rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.15s ease;
+      font-weight: 500;
+    }
+    .dossier-open-btn:hover {
+      background: #36342e;
+      border-color: #36342e;
+    }
+
+    .card-quick-links {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-mute);
+    }
+    .card-quick-links a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .card-quick-links a:hover {
+      color: var(--text-fg);
+    }
+
+    /* ========================================================= */
+    /* FULL PAGE VIEW (Seamless Full-Screen Dedicated Dossier)   */
+    /* ========================================================= */
+    #fullPageView {
+      display: none;
+      min-height: 100vh;
+      background: var(--bg-paper);
+      width: 100%;
+      position: relative;
+      z-index: 200;
+    }
+    #fullPageView.active {
+      display: block;
+    }
+
+    .fullpage-sticky-header {
+      position: sticky;
+      top: 0;
+      background: rgba(242, 239, 233, 0.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-line);
+      padding: 1rem 0;
+      z-index: 50;
+    }
+    .fullpage-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .back-btn {
+      background: var(--bg-paper-card);
+      border: 1px solid var(--border-line);
+      color: var(--text-fg);
+      padding: 0.45rem 0.95rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.15s ease;
+    }
+    .back-btn:hover {
+      background: var(--border-line);
+    }
+    .breadcrumb-text {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-mute);
+    }
+
+    .fullpage-hero {
+      padding: 3rem 0 2rem;
+      border-bottom: 1px solid var(--border-line);
+    }
+    .fullpage-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.05;
+      font-weight: 400;
+      color: var(--text-fg);
+      margin-bottom: 0.5rem;
+    }
+    .fullpage-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-dim);
+      font-family: var(--font-serif);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Dual Authentic Visual Row */
+    .fullpage-visual-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 1.75rem;
+      margin: 2rem 0;
+    }
+    @media (max-width: 860px) {
+      .fullpage-visual-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .fullpage-img-card {
+      background: #141311;
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      height: 380px;
+      position: relative;
+    }
+    .fullpage-img-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .fullpage-mol-card {
+      background: #141311;
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      height: 380px;
+      position: relative;
+    }
+    .img-card-caption {
+      position: absolute;
+      bottom: 0;
+      inset-x: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+      color: #eae6de;
+      padding: 0.85rem 1.15rem 0.65rem;
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+    }
+
+    /* Distinct Explainer Card Sections (Separated Cleanly) */
+    .eli10-dossier-card {
+      background: var(--bg-paper-card);
+      border: 1px solid var(--border-line);
+      border-left: 4px solid var(--accent-amber);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      margin: 2.5rem 0;
+      max-width: 900px;
+    }
+    .eli10-badge {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-amber);
+      font-weight: 600;
+      margin-bottom: 0.65rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .eli10-body-text {
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: var(--text-fg);
+    }
+
+    /* Full Page Scientific Sections */
+    .dossier-section {
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border-line);
+    }
+    .dossier-section-title {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      color: var(--text-fg);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+    .dossier-section-title::before {
+      content: "§";
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      color: var(--accent-science);
+    }
+    .dossier-section p {
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+      max-width: 860px;
+    }
+
+    /* Pipeline Grid */
+    .pipeline-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin: 1.75rem 0;
+    }
+    .pipeline-step {
+      background: var(--bg-paper-card);
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-md);
+      padding: 1.15rem;
+    }
+    .step-num {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--accent-science);
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+    .step-title {
+      font-weight: 600;
+      font-size: 0.9375rem;
+      margin-bottom: 0.35rem;
+      color: var(--text-fg);
+    }
+    .step-desc {
+      font-size: 0.8125rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    /* Reality Box: Why Asking AI Alone Fails */
+    .reality-callout {
+      background: var(--accent-amber-subtle);
+      border: 1px solid var(--accent-amber-border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      max-width: 860px;
+    }
+    .reality-callout h4 {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent-amber);
+      margin-bottom: 0.65rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .reality-callout ul {
+      margin-left: 1.25rem;
+      font-size: 0.875rem;
+      color: var(--text-dim);
+      line-height: 1.55;
+    }
+    .reality-callout li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Links & Publications Table */
+    .links-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+      margin: 1.5rem 0;
+      max-width: 900px;
+    }
+    .links-table th, .links-table td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-line);
+    }
+    .links-table th {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-mute);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: var(--bg-paper-card);
+    }
+    .links-table a {
+      color: var(--accent-science);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .links-table a:hover {
+      color: var(--text-fg);
+    }
+
+    /* Contact Details inside Dossier */
+    .dossier-contact-card {
+      background: var(--bg-paper-card);
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      max-width: 860px;
+    }
+    .contact-item-row {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.65rem;
+      font-size: 0.875rem;
+    }
+    .contact-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-mute);
+      min-width: 120px;
+      text-transform: uppercase;
+    }
+    .contact-val a {
+      color: var(--accent-science);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* ========================================================= */
+    /* WHY & HOW OPENSCIENCE IS BETTER IN RESEARCHING            */
+    /* (Updated Section addressing Screenshot 2026-10-26 at 2.07.31 PM) */
+    /* ========================================================= */
+    .openscience-research-section {
+      background: var(--bg-paper-card);
+      border-top: 1px solid var(--border-line);
+      border-bottom: 1px solid var(--border-line);
+      padding: 5rem 0;
+      margin-top: 2rem;
+    }
+    .os-comparison-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+    @media (max-width: 860px) {
+      .os-comparison-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+    }
+    .os-section-badge {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-science);
+      margin-bottom: 0.75rem;
+    }
+    .os-main-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+      line-height: 1.08;
+      font-weight: 400;
+      color: var(--text-fg);
+      margin-bottom: 1.25rem;
+    }
+    .os-lead-paragraph {
+      font-size: 1.05rem;
+      color: var(--text-dim);
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+    }
+    .os-limits-box {
+      background: #fbf7ee;
+      border: 1px solid #d9cbb2;
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      font-size: 0.875rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+    .os-limits-box strong {
+      color: var(--text-fg);
+    }
+
+    .os-feature-card {
+      background: var(--bg-paper);
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+      transition: border-color 0.15s ease;
+    }
+    .os-feature-card:hover {
+      border-color: var(--border-dark);
+    }
+    .os-feature-tag {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-science);
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+    .os-feature-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-fg);
+      margin-bottom: 0.4rem;
+    }
+    .os-feature-desc {
+      font-size: 0.875rem;
+      color: var(--text-dim);
+      line-height: 1.55;
+    }
+
+    /* Outreach Protocol Section */
+    .mandatory-study-banner {
+      background: #faf4e8;
+      border: 1px solid #c9b48c;
+      border-left: 4px solid var(--accent-amber);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.75rem;
+    }
+    .mandatory-study-banner h4 {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-amber);
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .mandatory-study-banner p {
+      font-size: 0.9375rem;
+      color: var(--text-dim);
+      line-height: 1.55;
+    }
+
+    .outreach-box {
+      background: var(--bg-paper-card);
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      max-width: 860px;
+    }
+    .outreach-template {
+      background: var(--bg-paper-subtle);
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-sm);
+      padding: 1.15rem;
+      font-family: var(--font-mono);
+      font-size: 0.78125rem;
+      color: var(--text-dim);
+      white-space: pre-wrap;
+      word-break: break-word;
+      line-height: 1.55;
+      margin: 1rem 0;
+    }
+    .copy-btn {
+      background: var(--text-fg);
+      color: var(--bg-paper);
+      border: none;
+      padding: 0.4rem 0.85rem;
+      font-family: var(--font-mono);
+      font-size: 0.71875rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .copy-btn:hover {
+      opacity: 0.85;
+    }
+
+    /* OpenScience Integration Callout inside Dossier */
+    .openscience-dossier-box {
+      border: 1px dashed var(--accent-science);
+      background: var(--accent-science-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-top: 2rem;
+      max-width: 860px;
+    }
+    .openscience-dossier-box h4 {
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      color: var(--accent-science);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    .openscience-dossier-box p {
+      font-size: 0.9375rem;
+      color: var(--text-dim);
+      margin-bottom: 0.85rem;
+      line-height: 1.55;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-line);
+      padding: 3.5rem 0 2.5rem;
+      background: var(--bg-paper);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    @media (max-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+    .footer-brand-title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--text-fg);
+      margin-bottom: 0.5rem;
+    }
+    .footer-brand-desc {
+      font-size: 0.875rem;
+      color: var(--text-mute);
+      max-width: 380px;
+      line-height: 1.5;
+    }
+    .footer-links-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    .footer-col h5 {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-faint);
+      margin-bottom: 0.75rem;
+    }
+    .footer-col ul {
+      list-style: none;
+    }
+    .footer-col li {
+      margin-bottom: 0.5rem;
+    }
+    .footer-col a {
+      font-size: 0.875rem;
+      color: var(--text-dim);
+    }
+    .footer-col a:hover {
+      color: var(--text-fg);
+    }
+
+    .footer-bottom-watermark {
+      font-family: var(--font-serif);
+      font-size: clamp(3rem, 12vw, 9rem);
+      line-height: 0.85;
+      text-align: center;
+      color: #e5e0d4;
+      user-select: none;
+      margin-top: 2rem;
+      letter-spacing: -0.04em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================= -->
+  <!-- MAIN DIRECTORY VIEW                                       -->
+  <!-- ========================================================= -->
+  <div id="directoryView">
+
+    <!-- Top Notice Strip -->
+    <div class="top-notice-bar">
+      <div class="container top-notice-inner">
+        <div class="notice-pill">
+          <span class="pulse-dot"></span>
+          <span>Independent Research & Scientific Dossier</span>
+        </div>
+        <div>
+          <span>Explore the Open-Source AI Co-Scientist Workbench: </span>
+          <a href="https://www.openscience.sh/" target="_blank" rel="noopener noreferrer" class="openscience-link-btn">
+            Visit openscience.sh ↗
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+      <div class="container">
+        <div class="brand-row">
+          <div>
+            <h1 class="brand-title">OpenScience <span>Breakthroughs</span></h1>
+            <p style="font-family: var(--font-mono); font-size: 0.8125rem; color: var(--text-mute); margin-top: 0.35rem; letter-spacing: 0.04em;">
+              DOCUMENTING CITIZEN-LED AI IN MOLECULAR BIOLOGY, DIAGNOSTICS & DRUG REPURPOSING
+            </p>
+          </div>
+          <div class="header-links">
+            <a href="https://www.openscience.sh/" target="_blank" rel="noopener noreferrer">About OpenScience ↗</a>
+            <a href="#how-openscience-helps">Why OpenScience for Research</a>
+            <a href="#outreach-guide">Study & Connect Protocol</a>
+            <a href="https://github.com/synthetic-sciences/OpenScience" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          </div>
+        </div>
+
+        <div class="hero-lead-grid">
+          <div class="hero-lead-text">
+            People who used artificial intelligence to treat incurable diseases in their loved ones, pets, and themselves did not simply "ask AI to invent a cure." They orchestrated bioinformatics pipelines, sequenced somatic genomes, modeled 3D protein folding, and connected literature knowledge graphs.
+          </div>
+          <div class="hero-context-box">
+            <span class="disclaimer-tag">Research & Methodology Purpose</span>
+            These historical breakthroughs were conducted by individual pioneers, university labs, and clinicians. They were <strong>not</strong> conducted on OpenScience. We analyze their workflows to understand the computational thinking required so that anyone can use <a href="https://www.openscience.sh/" target="_blank" rel="noopener noreferrer" style="color: var(--accent-science); text-decoration: underline; font-weight: 600;">openscience.sh</a> to replicate literature synthesis, bioinformatic code execution, and open structural biology locally.
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Clean Filter Bar: Clean category tabs only -->
+    <div class="controls-bar">
+      <div class="container controls-inner">
+        <div class="filter-tabs" id="filterTabs">
+          <button class="filter-tab active" data-filter="all">All Case Studies (6)</button>
+          <button class="filter-tab" data-filter="pet">Pets / Canine Oncology</button>
+          <button class="filter-tab" data-filter="pediatric">Pediatric Mysteries</button>
+          <button class="filter-tab" data-filter="repurposing">Drug Repurposing & AI</button>
+          <button class="filter-tab" data-filter="genomics">Phenotype & Genetics</button>
+          <button class="filter-tab" data-filter="open-ai">Democratized AI Tools</button>
+        </div>
+
+        <div class="filter-count-note">
+          Click any card to open its complete full-page scientific dossier
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <main class="container">
+      <div class="section-meta-strip">
+        <span>Verified Pioneers & Realized Clinical Outgrowths</span>
+        <span>Includes authentic photographic records & interactive 3D structures</span>
+      </div>
+
+      <!-- Pioneers Grid (Streamlined & Uncluttered) -->
+      <div class="pioneers-grid" id="pioneersGrid">
+        
+        <!-- 1. Paul Conyngham & Rosie -->
+        <article class="pioneer-card" data-category="pet" id="card-conyngham">
+          <div class="card-media-wrapper">
+            <div class="media-viewport">
+              <div class="media-slide slide-subject active" id="slide-subject-1">
+                <img src="https://d2eehagpk5cl65.cloudfront.net/img/c800x450-w800-q80/uploads/2026/03/dog-cancer-v2-800x450.jpg" alt="Paul Conyngham with his rescue dog Rosie" loading="lazy">
+              </div>
+              <div class="media-slide slide-molecule" id="slide-molecule-1">
+                <canvas class="mol-canvas" id="canvas-mol-1" data-mol-type="kinase"></canvas>
+              </div>
+            </div>
+            <div class="media-switch-controls">
+              <div class="media-toggle-pill">
+                <button class="media-pill-btn active" onclick="switchMedia(1, 'subject', this)">Paul & Rosie</button>
+                <button class="media-pill-btn" onclick="switchMedia(1, 'molecule', this)">3D Neoantigen / c-KIT</button>
+              </div>
+              <span class="mol-hint" id="hint-mol-1" style="display:none;">Drag to rotate 3D</span>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="card-category-strip">
+              <span class="category-badge">Veterinary Oncology</span>
+              <span class="status-badge">Tumors Regressed</span>
+            </div>
+            <div class="pioneer-names">
+              <h3 class="pioneer-title">Paul Conyngham</h3>
+              <div class="subject-subtitle">Treated: Rosie (Staffordshire Bull Terrier Cross)</div>
+            </div>
+            <div class="target-condition">Aggressive Mast Cell Cancer (Terminal Cutaneous Mastocytoma)</div>
+
+            <div class="card-overview-text">
+              Engineered a patient-specific canine mRNA cancer vaccine by coupling high-depth whole-exome sequencing at UNSW with AlphaFold 2 and NetMHCpan-4.1 neoepitope modeling, leading to tumor regression.
+            </div>
+
+            <div class="tools-list">
+              <span class="tool-chip">AlphaFold 2</span>
+              <span class="tool-chip">NetMHCpan</span>
+              <span class="tool-chip">ChatGPT/Grok</span>
+              <span class="tool-chip">UNSW RNA Lab</span>
+              <span class="tool-chip">mRNA-LNP</span>
+            </div>
+
+            <div class="card-footer">
+              <button class="dossier-open-btn" onclick="openFullPage('conyngham')">
+                Open Full Dossier →
+              </button>
+              <div class="card-quick-links">
+                <a href="https://github.com/PaulConyngham" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://gamgee.ai" target="_blank" rel="noopener">Gamgee</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2. Courtney & Alex -->
+        <article class="pioneer-card" data-category="pediatric" id="card-alex">
+          <div class="card-media-wrapper">
+            <div class="media-viewport">
+              <div class="media-slide slide-subject active" id="slide-subject-2">
+                <img src="https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1500w,f_auto,q_auto:best/rockcms/2023-09/Tebas-5-fb9a70.jpg" alt="Courtney and her son Alex from NBC Today Show" loading="lazy">
+              </div>
+              <div class="media-slide slide-molecule" id="slide-molecule-2">
+                <canvas class="mol-canvas" id="canvas-mol-2" data-mol-type="spine"></canvas>
+              </div>
+            </div>
+            <div class="media-switch-controls">
+              <div class="media-toggle-pill">
+                <button class="media-pill-btn active" onclick="switchMedia(2, 'subject', this)">Courtney & Alex</button>
+                <button class="media-pill-btn" onclick="switchMedia(2, 'molecule', this)">Spine / Tethered Cord</button>
+              </div>
+              <span class="mol-hint" id="hint-mol-2" style="display:none;">Interactive Anatomy</span>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="card-category-strip">
+              <span class="category-badge">Pediatric Neurology</span>
+              <span class="status-badge">Full Surgical Recovery</span>
+            </div>
+            <div class="pioneer-names">
+              <h3 class="pioneer-title">Courtney Morales Hofmann</h3>
+              <div class="subject-subtitle">Saved: Alex (Her 4-year-old son)</div>
+            </div>
+            <div class="target-condition">Tethered Cord Syndrome & Spina Bifida Occulta (17 Doctors Missed)</div>
+
+            <div class="card-overview-text">
+              Synthesized 3 years of discordant dental, orthopedic, and MRI notes into an LLM differential reasoning chain, identifying occult spinal cord traction validated by pediatric neurosurgery.
+            </div>
+
+            <div class="tools-list">
+              <span class="tool-chip">OpenAI GPT-4</span>
+              <span class="tool-chip">Multi-EHR Synthesis</span>
+              <span class="tool-chip">Radiology NLP</span>
+              <span class="tool-chip">Microsurgery</span>
+            </div>
+
+            <div class="card-footer">
+              <button class="dossier-open-btn" onclick="openFullPage('alex')">
+                Open Full Dossier →
+              </button>
+              <div class="card-quick-links">
+                <a href="https://www.today.com/health/chatgpt-diagnoses-boy-medical-mystery-rcna104443" target="_blank" rel="noopener">Today Show</a>
+                <a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank" rel="noopener">PubMed</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3. Dr. David Fajgenbaum -->
+        <article class="pioneer-card" data-category="repurposing" id="card-fajgenbaum">
+          <div class="card-media-wrapper">
+            <div class="media-viewport">
+              <div class="media-slide slide-subject active" id="slide-subject-3">
+                <img src="https://davidfajgenbaum.com/wp-content/uploads/2025/08/dr-fajgenbaum.webp" alt="Dr. David Fajgenbaum in the research lab" loading="lazy">
+              </div>
+              <div class="media-slide slide-molecule" id="slide-molecule-3">
+                <canvas class="mol-canvas" id="canvas-mol-3" data-mol-type="mtor"></canvas>
+              </div>
+            </div>
+            <div class="media-switch-controls">
+              <div class="media-toggle-pill">
+                <button class="media-pill-btn active" onclick="switchMedia(3, 'subject', this)">Dr. David Fajgenbaum</button>
+                <button class="media-pill-btn" onclick="switchMedia(3, 'molecule', this)">mTOR Kinase Target</button>
+              </div>
+              <span class="mol-hint" id="hint-mol-3" style="display:none;">3D mTOR Complex</span>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="card-category-strip">
+              <span class="category-badge">Drug Repurposing & Immunology</span>
+              <span class="status-badge">11+ Yrs Remission</span>
+            </div>
+            <div class="pioneer-names">
+              <h3 class="pioneer-title">Dr. David Fajgenbaum, MD</h3>
+              <div class="subject-subtitle">Saved: Himself & Thousands via Every Cure</div>
+            </div>
+            <div class="target-condition">Idiopathic Multicentric Castleman Disease (iMCD Cytokine Storm)</div>
+
+            <div class="card-overview-text">
+              Tracked longitudinal serum cytokines through 5 near-death relapses to isolate hyperactive mTORC1 signaling, repurposing generic Sirolimus to save his life and launching Every Cure's AI engine.
+            </div>
+
+            <div class="tools-list">
+              <span class="tool-chip">Every Cure AI</span>
+              <span class="tool-chip">Knowledge Graphs</span>
+              <span class="tool-chip">Cytokine Profiling</span>
+              <span class="tool-chip">Sirolimus</span>
+            </div>
+
+            <div class="card-footer">
+              <button class="dossier-open-btn" onclick="openFullPage('fajgenbaum')">
+                Open Full Dossier →
+              </button>
+              <div class="card-quick-links">
+                <a href="https://everycure.org" target="_blank" rel="noopener">Every Cure</a>
+                <a href="https://www.thelancet.com/journals/lanhae/article/PIIS2352-3026(19)30145-2/fulltext" target="_blank" rel="noopener">Lancet Paper</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4. Dr. Matt Might & Bertrand -->
+        <article class="pioneer-card" data-category="repurposing" id="card-might">
+          <div class="card-media-wrapper">
+            <div class="media-viewport">
+              <div class="media-slide slide-subject active" id="slide-subject-4">
+                <img src="https://www.uab.edu/medicine/pmi/images/img_matt-might-lg.jpg" alt="Dr. Matt Might, Director of UAB Precision Medicine" loading="lazy">
+              </div>
+              <div class="media-slide slide-molecule" id="slide-molecule-4">
+                <canvas class="mol-canvas" id="canvas-mol-4" data-mol-type="ngly1"></canvas>
+              </div>
+            </div>
+            <div class="media-switch-controls">
+              <div class="media-toggle-pill">
+                <button class="media-pill-btn active" onclick="switchMedia(4, 'subject', this)">Dr. Matt Might & Bertrand</button>
+                <button class="media-pill-btn" onclick="switchMedia(4, 'molecule', this)">NGLY1 Enzyme Fold</button>
+              </div>
+              <span class="mol-hint" id="hint-mol-4" style="display:none;">3D N-Glycanase</span>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="card-category-strip">
+              <span class="category-badge">Computational Genetics</span>
+              <span class="status-badge">Novel Disease Solved</span>
+            </div>
+            <div class="pioneer-names">
+              <h3 class="pioneer-title">Dr. Matt Might, PhD</h3>
+              <div class="subject-subtitle">Saved: Son Bertrand & UAB Precision Medicine Patients</div>
+            </div>
+            <div class="target-condition">NGLY1 Deficiency (Deglycosylation Disorder, Inability to Produce Tears)</div>
+
+            <div class="card-overview-text">
+              Discovered the first documented case of NGLY1 deficiency through algorithmic exome filtering, then built mediKanren AI to deduce that GlcNAc supplementation could restore tear production.
+            </div>
+
+            <div class="tools-list">
+              <span class="tool-chip">mediKanren</span>
+              <span class="tool-chip">ROBOKOP</span>
+              <span class="tool-chip">NIH Translator</span>
+              <span class="tool-chip">Trio WES</span>
+              <span class="tool-chip">GlcNAc</span>
+            </div>
+
+            <div class="card-footer">
+              <button class="dossier-open-btn" onclick="openFullPage('might')">
+                Open Full Dossier →
+              </button>
+              <div class="card-quick-links">
+                <a href="https://github.com/webyrd/mediKanren" target="_blank" rel="noopener">mediKanren</a>
+                <a href="https://matt.might.net" target="_blank" rel="noopener">might.net</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 5. Jill Viles & Priscilla Lopes-Schliep -->
+        <article class="pioneer-card" data-category="genomics" id="card-viles">
+          <div class="card-media-wrapper">
+            <div class="media-viewport">
+              <div class="media-slide slide-subject active" id="slide-subject-5">
+                <img src="https://assets-c3.propublica.org/legacy/images/20160115-genetic-mystery-1200x630.jpg" alt="Jill Viles and Olympic medalist Priscilla Lopes-Schliep from ProPublica" loading="lazy">
+              </div>
+              <div class="media-slide slide-molecule" id="slide-molecule-5">
+                <canvas class="mol-canvas" id="canvas-mol-5" data-mol-type="lmna"></canvas>
+              </div>
+            </div>
+            <div class="media-switch-controls">
+              <div class="media-toggle-pill">
+                <button class="media-pill-btn active" onclick="switchMedia(5, 'subject', this)">Jill & Priscilla</button>
+                <button class="media-pill-btn" onclick="switchMedia(5, 'molecule', this)">LMNA Nuclear Lamina</button>
+              </div>
+              <span class="mol-hint" id="hint-mol-5" style="display:none;">3D Lamin A/C</span>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="card-category-strip">
+              <span class="category-badge">Phenotypic Genetics</span>
+              <span class="status-badge">Mechanism Proven</span>
+            </div>
+            <div class="pioneer-names">
+              <h3 class="pioneer-title">Jill Viles</h3>
+              <div class="subject-subtitle">Connected: Herself & Olympic Hurdler Priscilla Lopes-Schliep</div>
+            </div>
+            <div class="target-condition">LMNA Gene Mutation (Emery-Dreifuss Dystrophy vs Muscular Hypertrophy)</div>
+
+            <div class="card-overview-text">
+              Used NCBI genomic tools to self-diagnose an LMNA mutation, then deduced that Canadian Olympic bronze-medalist Priscilla Lopes-Schliep shared the identical gene—validated at Johns Hopkins.
+            </div>
+
+            <div class="tools-list">
+              <span class="tool-chip">NCBI BLAST</span>
+              <span class="tool-chip">OMIM</span>
+              <span class="tool-chip">LMNA Sequencing</span>
+              <span class="tool-chip">Phenotype Mapping</span>
+            </div>
+
+            <div class="card-footer">
+              <button class="dossier-open-btn" onclick="openFullPage('viles')">
+                Open Full Dossier →
+              </button>
+              <div class="card-quick-links">
+                <a href="https://www.thisamericanlife.org/577/something-only-i-can-see" target="_blank" rel="noopener">This American Life</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 6. Dr. Sergey Ovchinnikov & Dr. Martin Steinegger (ColabFold) -->
+        <article class="pioneer-card" data-category="open-ai" id="card-colabfold">
+          <div class="card-media-wrapper">
+            <div class="media-viewport">
+              <div class="media-slide slide-subject active" id="slide-subject-6">
+                <img src="https://avatars.githubusercontent.com/u/6225586?v=4" alt="Dr. Sergey Ovchinnikov (sokrypton)" loading="lazy">
+              </div>
+              <div class="media-slide slide-molecule" id="slide-molecule-6">
+                <canvas class="mol-canvas" id="canvas-mol-6" data-mol-type="colab"></canvas>
+              </div>
+            </div>
+            <div class="media-switch-controls">
+              <div class="media-toggle-pill">
+                <button class="media-pill-btn active" onclick="switchMedia(6, 'subject', this)">Ovchinnikov & Steinegger</button>
+                <button class="media-pill-btn" onclick="switchMedia(6, 'molecule', this)">AlphaFold 3D Ribbon</button>
+              </div>
+              <span class="mol-hint" id="hint-mol-6" style="display:none;">3D ColabFold Ribbons</span>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="card-category-strip">
+              <span class="category-badge">Democratic Scientific AI</span>
+              <span class="status-badge">4,500+ GitHub Stars</span>
+            </div>
+            <div class="pioneer-names">
+              <h3 class="pioneer-title">Dr. Sergey Ovchinnikov & Dr. Martin Steinegger</h3>
+              <div class="subject-subtitle">Empowered: Global Rare Disease Families & Researchers</div>
+            </div>
+            <div class="target-condition">Democratizing AlphaFold 2 / ESMFold (30-100x Speedup on Free GPUs)</div>
+
+            <div class="card-overview-text">
+              Combined the ultra-fast MMseqs2 alignment API with AlphaFold 2 to speed up protein folding 30–100x, allowing independent families and researchers to fold mutated proteins in browser notebooks.
+            </div>
+
+            <div class="tools-list">
+              <span class="tool-chip">ColabFold</span>
+              <span class="tool-chip">AlphaFold 2</span>
+              <span class="tool-chip">MMseqs2</span>
+              <span class="tool-chip">ESMFold</span>
+              <span class="tool-chip">Open Source</span>
+            </div>
+
+            <div class="card-footer">
+              <button class="dossier-open-btn" onclick="openFullPage('colabfold')">
+                Open Full Dossier →
+              </button>
+              <div class="card-quick-links">
+                <a href="https://github.com/sokrypton/ColabFold" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://www.nature.com/articles/s41592-022-01488-1" target="_blank" rel="noopener">Nature Methods</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </main>
+
+    <!-- ========================================================= -->
+    <!-- WHY & HOW OPENSCIENCE IS BETTER IN RESEARCHING            -->
+    <!-- (Directly addressing Screenshot 2026-10-26 at 2.07.31 PM) -->
+    <!-- ========================================================= -->
+    <section class="openscience-research-section" id="how-openscience-helps">
+      <div class="container">
+        <div class="os-comparison-grid">
+          <div>
+            <div class="os-section-badge">The OpenScience Advantage</div>
+            <h2 class="os-main-heading">Why Chatbots Fail at Real Science — And How OpenScience Solves It</h2>
+            <div class="os-lead-paragraph">
+              Commercial AI chat interfaces (ChatGPT, Claude, generic web LLMs) are isolated text predictors. They cannot run code, cannot inspect private somatic genomes, hallucinate non-existent chemical compounds, and have no direct connection to your local datasets.
+            </div>
+            <div class="os-limits-box">
+              <strong>The Core Difference:</strong> In every real-world medical breakthrough above, the pioneer had to cobble together 5 separate fragmented tools: sequencing labs, terminal command lines, Python scripts, PubMed tabs, and cloud GPUs. <strong>OpenScience (<a href="https://www.openscience.sh/" target="_blank" rel="noopener" style="color: var(--accent-science); text-decoration: underline; font-weight: 600;">openscience.sh</a>)</strong> is the first open-source unified workbench built specifically to bring literature, code, compute, and results into one reproducible local workspace.
+            </div>
+          </div>
+
+          <div>
+            <div class="os-feature-card">
+              <div class="os-feature-tag">Integrated Compute & Bioinformatics</div>
+              <h3 class="os-feature-title">Native Local Code Execution (Python, Bash, R)</h3>
+              <p class="os-feature-desc">Instead of copying code snippets back and forth into broken terminals, OpenScience executes Biopython, GATK variant calling, and sequence alignment scripts directly within the workspace with full execution logs.</p>
+            </div>
+
+            <div class="os-feature-card">
+              <div class="os-feature-tag">Grounding & Citation Integrity</div>
+              <h3 class="os-feature-title">Deep Literature Synthesis Across PubMed & bioRxiv</h3>
+              <p class="os-feature-desc">OpenScience searches and triangulates across millions of medical papers, extracting exact paragraph-level citations with linked PDFs. It eliminates hallucinated studies and phantom clinical trials.</p>
+            </div>
+
+            <div class="os-feature-card">
+              <div class="os-feature-tag">Complete Data Sovereignty</div>
+              <h3 class="os-feature-title">100% Local Privacy for Sensitive Genomic Data</h3>
+              <p class="os-feature-desc">Patient exome files, confidential clinical scans, and unpublished laboratory notes stay strictly on your local machine. Nothing is ever uploaded to commercial training datasets or public logs.</p>
+            </div>
+
+            <div class="os-feature-card">
+              <div class="os-feature-tag">Model Freedom</div>
+              <h3 class="os-feature-title">Connect Any Frontier API or Run Local Offline Models</h3>
+              <p class="os-feature-desc">Free models included out-of-the-box, or connect your own API keys for Claude 3.7 Sonnet, GPT-4o, and Gemini 2.5 Pro. You can also run offline open-weights models (via Ollama/vLLM) with zero cloud dependency.</p>
+            </div>
+
+            <div class="os-feature-card">
+              <div class="os-feature-tag">Autonomous Research Reasoning</div>
+              <h3 class="os-feature-title">Multi-Agent Co-Scientists (Ace & Domain Specialists)</h3>
+              <p class="os-feature-desc">Specialized AI agents designed specifically for hypothesis generation, protein stability evaluation, and experimental protocol design rather than generic chat banter.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Outreach & Contact Guide (Kept at bottom as requested, with mandatory prerequisite) -->
+    <section class="container" id="outreach-guide" style="padding: 4.5rem 1.5rem;">
+      <div style="max-width: 820px; margin: 0 auto;">
+        
+        <!-- Mandatory Study Prerequisite Warning Banner -->
+        <div class="mandatory-study-banner">
+          <h4>Prerequisite: Study and Understand Thoroughly Before Connecting</h4>
+          <p>
+            These researchers, clinicians, and parents receive dozens of speculative messages daily. Before reaching out, read their peer-reviewed papers, inspect their open repositories, and ensure you have a precise, technical question. Connection must be grounded in genuine scientific understanding—never send vague requests asking for generic cures.
+          </p>
+        </div>
+
+        <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-science); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem;">
+          PIONEER ENGAGEMENT PROTOCOL
+        </div>
+        <h2 style="font-family: var(--font-serif); font-size: clamp(2rem, 3.5vw, 2.75rem); line-height: 1.15; margin-bottom: 1.25rem;">
+          How to Reach Out & What to Ask
+        </h2>
+        <p style="font-size: 1rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 1.5rem;">
+          These researchers, entrepreneurs, and parents receive dozens of inquiries weekly. If you reach out, avoid vague requests like <em>"Can AI cure my family member?"</em> Instead, ask precise, respectful methodological questions that respect their time and clinical boundaries:
+        </p>
+
+        <div class="outreach-box">
+          <h4 style="font-family: var(--font-mono); font-size: 0.8125rem; text-transform: uppercase; margin-bottom: 0.75rem; color: var(--text-fg);">
+            HIGH-YIELD OUTREACH QUESTIONS TO ASK
+          </h4>
+          <ul style="margin-left: 1.25rem; font-size: 0.875rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 1.25rem;">
+            <li><strong>Sequencing Specifications:</strong> What minimum sequencing depth (e.g. 100x vs 300x WES) and tissue preservation protocols (FFPE vs fresh frozen) were required for reliable variant calling?</li>
+            <li><strong>Bioinformatics False Positives:</strong> What filtering thresholds did you use in NetMHCpan or AlphaFold to eliminate self-reactive non-immunogenic peptide candidates?</li>
+            <li><strong>Lab Partnership Strategy:</strong> How did you approach academic wet-lab directors (like university RNA institutes) as an independent researcher to secure custom mRNA synthesis under compassionate-use frameworks?</li>
+            <li><strong>Reproducibility:</strong> Are your pipeline scripts, Jupyter notebooks, or prompt chains open-sourced on GitHub or bioRxiv for independent verification?</li>
+          </ul>
+
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-mute); margin-bottom: 0.35rem;">
+            Standard Outreach Email / LinkedIn Message Template:
+          </div>
+          <div class="outreach-template" id="genericTemplate">Subject: Inquiring regarding methodology: AI bioinformatics & [Target Condition] pipeline
+
+Dear [Name / Dr. Surname],
+
+I have closely studied your pioneering work with [Target / Subject, e.g., Rosie / Every Cure / Bertrand] and your approach to combining genomic analysis with AI-assisted structural modeling.
+
+I am an independent researcher exploring computational precision biology, and I am studying the exact technical pipeline required to move from raw sequencing / clinical notes to actionable interventions.
+
+Could you share:
+1. Which specific variant-calling or structural prediction tools yielded the highest fidelity results in your workflow?
+2. What advice would you give to someone setting up a local bioinformatics environment to analyze rare mutations?
+
+I deeply respect your time and the trail you have blazed for open, data-driven medical discovery.
+
+Warm regards,
+[Your Name]
+[Your Affiliation / OpenScience Research Profile]</div>
+          <button class="copy-btn" onclick="copyTemplate('genericTemplate')">
+            Copy Template to Clipboard
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- OpenScience Workbench Connection Banner -->
+    <section style="background: var(--bg-paper-card); border-top: 1px solid var(--border-line); border-bottom: 1px solid var(--border-line); padding: 3rem 0;">
+      <div class="container" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem;">
+        <div style="max-width: 640px;">
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-science); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.35rem;">
+            Open-Source Science Workbench
+          </div>
+          <h3 style="font-family: var(--font-serif); font-size: 1.85rem; line-height: 1.2; margin-bottom: 0.65rem;">
+            Replicate Literature, Code & Molecular Analysis on OpenScience
+          </h3>
+          <p style="font-size: 0.9375rem; color: var(--text-dim); line-height: 1.55;">
+            OpenScience is an open-source AI co-scientist that runs locally on macOS, Linux, and Windows. Run local models or connect frontier APIs to analyze PubMed papers, execute Python bioinformatics scripts, and study structural biology with complete privacy.
+          </p>
+        </div>
+        <div>
+          <a href="https://www.openscience.sh/" target="_blank" rel="noopener noreferrer" style="background: var(--text-fg); color: var(--bg-paper); padding: 0.75rem 1.4rem; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 500; display: inline-flex; align-items: center; gap: 0.5rem;">
+            Get OpenScience at openscience.sh ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="footer-brand-title">OpenScience Dossier</div>
+            <p class="footer-brand-desc">
+              Documenting the human ingenuity, algorithmic pipelines, and structural biology tools transforming incurable conditions. Built with high-craft editorial minimalism inspired by FrontierRSI and OpenScience.
+            </p>
+          </div>
+
+          <div class="footer-links-grid">
+            <div class="footer-col">
+              <h5>OpenScience Platform</h5>
+              <ul>
+                <li><a href="https://www.openscience.sh/" target="_blank" rel="noopener">Home (openscience.sh)</a></li>
+                <li><a href="https://github.com/synthetic-sciences/OpenScience" target="_blank" rel="noopener">OpenScience GitHub</a></li>
+                <li><a href="https://frontierrsi.net/" target="_blank" rel="noopener">FrontierRSI Benchmark</a></li>
+                <li><a href="https://syntheticsciences.ai" target="_blank" rel="noopener">Synthetic Sciences</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h5>Scientific Repos</h5>
+              <ul>
+                <li><a href="https://github.com/sokrypton/ColabFold" target="_blank" rel="noopener">ColabFold / AlphaFold</a></li>
+                <li><a href="https://everycure.org" target="_blank" rel="noopener">Every Cure Platform</a></li>
+                <li><a href="https://github.com/webyrd/mediKanren" target="_blank" rel="noopener">mediKanren Logic AI</a></li>
+                <li><a href="https://gamgee.ai" target="_blank" rel="noopener">Gamgee Veterinary AI</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom-watermark">
+          OpenScience
+        </div>
+      </div>
+    </footer>
+
+  </div> <!-- End Directory View -->
+
+
+  <!-- ========================================================= -->
+  <!-- DEDICATED FULL-PAGE VIEW (Seamless Full-Screen Dossier)   -->
+  <!-- ========================================================= -->
+  <div id="fullPageView">
+    
+    <!-- Full-Page Sticky Navigation Bar -->
+    <div class="fullpage-sticky-header">
+      <div class="container fullpage-header-inner">
+        <button class="back-btn" onclick="closeFullPage()">
+          ← Back to Pioneer Directory
+        </button>
+        <div class="breadcrumb-text" id="fullpageBreadcrumb">
+          OpenScience / Pioneers / Loading...
+        </div>
+        <div>
+          <a href="https://www.openscience.sh/" target="_blank" rel="noopener" class="openscience-link-btn">
+            openscience.sh ↗
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Full-Page Dynamic Content Container -->
+    <div class="container" id="fullpageContent" style="padding-bottom: 5rem;">
+      <!-- Populated dynamically via JavaScript -->
+    </div>
+
+  </div> <!-- End Full Page View -->
+
+
+  <!-- JavaScript: Full Page Router, 3D WebGL, Media Switcher -->
+  <script>
+    // -------------------------------------------------------------
+    // Pioneer Dossier Database with Original Images & Contact Info
+    // -------------------------------------------------------------
+    const pioneerDossiers = {
+      conyngham: {
+        id: "conyngham",
+        meta: "Veterinary Oncology · Personalized mRNA Cancer Vaccine",
+        name: "Paul Conyngham",
+        subject: "Rosie (8-year-old rescue Staffordshire Bull Terrier Cross)",
+        condition: "Metastatic Cutaneous Mast Cell Cancer (Refractory to Palladia & Surgery)",
+        subjectImg: "https://d2eehagpk5cl65.cloudfront.net/img/c800x450-w800-q80/uploads/2026/03/dog-cancer-v2-800x450.jpg",
+        subjectCaption: "Authentic Photograph: Paul Conyngham with Rosie in Sydney (Photo: Tom Melville / Jake Willis)",
+        sciCaption: "Interactive 3D model: c-KIT receptor tyrosine kinase & predicted mutant neoantigen binding fold",
+        molType: "kinase",
+        eli10: "Cancer cells wear disguise masks that fool normal medicines. Paul had scientists read his dog Rosie's DNA like a giant book of code. Then he used AI as a super-detective to find the tiny typos on the robber's mask. He used that clue to print an mRNA 'recipe' that taught Rosie's bodyguards—her immune system—to spot the robber and chase the tumors away!",
+        contacts: {
+          email: "paul@gamgee.ai / contact@gamgee.ai",
+          linkedin: "https://www.linkedin.com/in/paulconyngham/",
+          twitter: "https://x.com/PaulConyngham",
+          platform: "https://gamgee.ai (Gamgee Veterinary AI)",
+          lab: "https://www.unsw.edu.au/research/rna (UNSW RNA Institute)"
+        },
+        scientificBreakdown: `
+          <div class="dossier-section">
+            <h3 class="dossier-section-title">The Clinical Reality & Somatic Oncology</h3>
+            <p>Rosie was diagnosed with high-grade cutaneous mastocytoma (mast cell tumor) with vascular and lymphatic invasion. Conventional interventions—surgical resection, multi-agent chemotherapy, and Toceranib phosphate (Palladia, a VEGFR/PDGFR/KIT receptor tyrosine kinase inhibitor)—failed to stop metastasis. Median life expectancy was under 8 weeks.</p>
+          </div>
+
+          <div class="dossier-section">
+            <h3 class="dossier-section-title">The Exact AI & Computational Pipeline</h3>
+            <p>Conyngham paid out-of-pocket for high-depth Whole-Exome Sequencing (WES) and RNA-seq of both the tumor biopsy and healthy germline tissue at the <strong>Ramaciotti Centre for Genomics</strong> at the University of New South Wales (UNSW).</p>
+            <div class="pipeline-grid">
+              <div class="pipeline-step">
+                <div class="step-num">Step 1</div>
+                <div class="step-title">Variant Calling</div>
+                <div class="step-desc">Used GATK and Biopython scripts (assisted by GPT-4 and Grok) to cross-reference tumor DNA against the canine reference genome (CanFam3.1), identifying somatic non-synonymous mutations.</div>
+              </div>
+              <div class="pipeline-step">
+                <div class="step-num">Step 2</div>
+                <div class="step-title">Neoantigen Epitope Modeling</div>
+                <div class="step-desc">Translated mutated nucleotide triplets into 8–11 amino acid candidate peptide epitopes. Utilized <strong>NetMHCpan-4.1</strong> and <strong>AlphaFold 2</strong> to simulate peptide-DLA (Dog Leukocyte Antigen / MHC Class I) binding affinities.</div>
+              </div>
+              <div class="pipeline-step">
+                <div class="step-num">Step 3</div>
+                <div class="step-title">LNP Formulation</div>
+                <div class="step-desc">Selected the top 10 ranked neoepitopes with lowest predicted self-tolerance. Partnered with Prof. Páll Thordarson at the <strong>UNSW RNA Institute</strong> to synthesize custom lipid nanoparticle (LNP) mRNA strands.</div>
+              </div>
+              <div class="pipeline-step">
+                <div class="step-num">Step 4</div>
+                <div class="step-title">Multi-Modal Regimen</div>
+                <div class="step-desc">Administered under compassionate veterinary approval alongside Toceranib (to inhibit c-KIT downstream phosphorylation) and a checkpoint modulator to prevent T-cell exhaustion.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="reality-callout">
+            <h4>Why Asking ChatGPT Alone Would Have Failed</h4>
+            <ul>
+              <li><strong>Zero Access to Somatic DNA:</strong> Without physical tissue biopsy and next-generation sequencing, no AI on Earth can predict patient-specific somatic mutations.</li>
+              <li><strong>Hallucination of Binding Affinities:</strong> LLMs generate plausible-looking peptide sequences that frequently cross-react with healthy tissue (causing fatal autoimmune storms). Dedicated neural tools like NetMHCpan and AlphaFold are mandatory.</li>
+              <li><strong>Wet-Lab Bottleneck:</strong> mRNA molecules must be chemically transcribed (in vitro transcription), capped with Cap-1 analogs, and encapsulated in microfluidic lipid nanoparticles under sterile conditions.</li>
+            </ul>
+          </div>
+
+          <div class="dossier-section">
+            <h3 class="dossier-section-title">Published Artifacts, Repositories & Clinical Data</h3>
+            <table class="links-table">
+              <thead>
+                <tr>
+                  <th>Resource</th>
+                  <th>Type</th>
+                  <th>Direct Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Paul Conyngham GitHub</td>
+                  <td>Open Source Code</td>
+                  <td><a href="https://github.com/PaulConyngham" target="_blank" rel="noopener">github.com/PaulConyngham ↗</a></td>
+                </tr>
+                <tr>
+                  <td>Gamgee (YC S24)</td>
+                  <td>Clinical Platform</td>
+                  <td><a href="https://gamgee.ai" target="_blank" rel="noopener">gamgee.ai (Canine mRNA Trials) ↗</a></td>
+                </tr>
+                <tr>
+                  <td>UNSW RNA Institute</td>
+                  <td>Research Partner</td>
+                  <td><a href="https://www.unsw.edu.au/research/rna" target="_blank" rel="noopener">UNSW RNA Research Group ↗</a></td>
+                </tr>
+                <tr>
+                  <td>Ramaciotti Centre for Genomics</td>
+                  <td>Sequencing Facility</td>
+                  <td><a href="https://www.ramaciotti.unsw.edu.au/" target="_blank" rel="noopener">ramaciotti.unsw.edu.au ↗</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="dossier-section">
+            <h3 class="dossier-section-title">Contact & Communication Channels</h3>
+            <p>Ensure you have studied the bioinformatics workflow before inquiring:</p>
+            <div class="dossier-contact-card">
+              <div class="contact-item-row">
+                <span class="contact-label">Email:</span>
+                <span class="contact-val">contact@gamgee.ai / paul@gamgee.ai</span>
+              </div>
+              <div class="contact-item-row">
+                <span class="contact-label">LinkedIn:</span>
+                <span class="contact-val"><a href="https://www.linkedin.com/in/paulconyngham/" target="_blank" rel="noopener">linkedin.com/in/paulconyngham ↗</a></span>
+              </div>
+              <div class="contact-item-row">
+                <span class="contact-label">X / Twitter:</span>
+                <span class="contact-val"><a href="https://x.com/PaulConyngham" target="_blank" rel="noopener">@PaulConyngham ↗</a></span>
+              </div>
+              <div class="contact-item-row">
+                <span class="contact-label">Company:</span>
+                <span class="contact-val"><a href="https://gamgee.ai" target="_blank" rel="noopener">gamgee.ai (Y Combinator S24) ↗</a></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="openscience-dossier-box">
+            <h4>Explore on OpenScience (openscience.sh)</h4>
+            <p>You can use the local <a href="https://www.openscience.sh/" target="_blank" rel="noopener" style="color: var(--accent-science); text-decoration: underline; font-weight: 600;">OpenScience co-scientist workbench</a> to execute GATK and Biopython scripts, synthesize literature on canine oncology, and interact with structural models locally without uploading sensitive genetic data to cloud servers.</p>
+          </div>
+        `
+      },
+
+      alex: {
+        id: "alex",
+        meta: "Pediatric Neurology · Multi-EHR Clinical Reasoning",
+        name: "Courtney Morales Hofmann",
+        subject: "Alex (Her 4-year-old son)",
+        condition: "Tethered Cord Syndrome secondary to Spina Bifida Occulta (17 Specialists Failed)",
+        subjectImg: "https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1500w,f_auto,q_auto:best/rockcms/2023-09/Tebas-5-fb9a70.jpg",
+        subjectCaption: "Authentic Photograph: Courtney and her son Alex (NBC News / Today Show)",
+        sciCaption: "Interactive anatomical model: Conus medullaris and lumbar filum terminale traction",
+        molType: "spine",
+        eli10: "Alex had an invisible rubber band pulling tightly on his spinal cord that made his legs drag and his head hurt, but 17 doctors only examined his teeth, his feet, or his posture individually. His mom pasted every single medical report into ChatGPT. The AI connected all the dots at once and said: 'Check his spinal cord!' A neurosurgeon confirmed it, untied the cord in surgery, and Alex could walk normally!",
+        contacts: {
+          email: "Via Patient Advocacy / Medical AI Symposia",
+          linkedin: "Courtney Morales Hofmann (Healthcare Patient Advocacy)",
+          twitter: "Via Pediatric Neurological Support Forums",
+          lab: "Dr. Holly Gilmer, MD (Beaumont Pediatric Neurosurgery)"
+        },
+        scientificBreakdown: `
+          <div class="dossier-section">
+            <h3 class="dossier-section-title">The Diagnostic Odyssey (17 Doctors, 3 Years)</h3>
+            <p>Beginning during early toddlerhood, Alex suffered severe chronic pain, stopped growing, dragged his left foot while walking, developed compulsive chewing behaviors, and lost the ability to sit crisscross applesauce. Over three years, he was examined by 17 specialists: pediatricians, dentists (who fitted an expander for airway fatigue), neurologists, orthopedic surgeons, and physical therapists. Each specialist treated symptoms in strict isolation.</p>
+          </div>
+
+          <div class="dossier-section">
+            <h3 class="dossier-section-title">The Prompt Synthesis Architecture</h3>
+            <p>Courtney collected complete raw medical records, including radiological impressions, MRI spine/brain scan notes, orthodontic scans, and physical therapy gait evaluations. Rather than asking a generic question, she constructed a multi-layered differential prompt:</p>
+            <div class="pipeline-grid">
+              <div class="pipeline-step">
+                <div class="step-num">Layer 1</div>
+                <div class="step-title">Multimodal Input</div>
+                <div class="step-desc">Inputted line-by-line MRI findings, dental palate notes, gait asymmetries, and sensory abnormalities into GPT-4.</div>
+              </div>
+              <div class="pipeline-step">
+                <div class="step-num">Layer 2</div>
+                <div class="step-title">Differential Reasoning</div>
+                <div class="step-desc">Instructed the model to identify a single unifying mechanical or embryological etiology explaining lower extremity motor deficits and craniofacial compensations.</div>
+              </div>
+              <div class="pipeline-step">
+                <div class="step-num">Layer 3</div>
+                <div class="step-title">Condition Flagged</div>
+                <div class="step-desc">GPT-4 returned <strong>Tethered Cord Syndrome</strong> secondary to occult spina bifida, explaining that spinal cord traction pulls mechanically on the entire neuroaxis.</div>
+              </div>
+              <div class="pipeline-step">
+                <div class="step-num">Layer 4</div>
+                <div class="step-title">Surgical Resolution</div>
+                <div class="step-desc">Presented thesis to pediatric neurosurgeon <strong>Dr. Holly Gilmer, MD</strong>, who verified the occult dysraphism on the scans and performed successful lumbar untethering.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="reality-callout">
+            <h4>Why Doctors Missed It & Why the Model Caught It</h4>
+            <ul>
+              <li><strong>Siloed Medicine vs Global Pattern Recognition:</strong> Specialists are hyper-trained in narrow anatomical domains. The dentist saw jaw tension; the orthopedist saw gait imbalance. The LLM has zero disciplinary silos and evaluates all vectors simultaneously.</li>
+              <li><strong>The Parent as Data Synthesizer:</strong> The AI only succeeded because the mother gathered high-resolution objective reports (MRI radiology transcripts) rather than vague subjective opinions.</li>
+            </ul>
+          </div>
+
+          <div class="dossier-section">
+            <h3 class="dossier-section-title">Clinical References & Validation</h3>
+            <table class="links-table">
+              <thead>
+                <tr>
+                  <th>Source</th>
+                  <th>Verification</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Dr. Holly Gilmer, MD</td>
+                  <td>Chief of Pediatric Neurosurgery</td>
+                  <td>Beaumont Children's Hospital / Michigan State University</td>
+                </tr>
+                <tr>
+                  <td>Today Show & NBC News</td>
+                  <td>Clinical Feature</td>
+                  <td><a href="https://www.today.com/health/chatgpt-diagnoses-boy-medical-mystery-rcna104443" target="_blank" rel="noopener">Read NBC Case Study ↗</a></td>
+                </tr>
+                <tr>
+                  <td>Radiology Business</td>
+                  <td>Medical Analysis</td>
+                  <td><a href="https://radiologybusiness.com" target="_blank" rel="noopener">Radiology AI Decision Support Review ↗</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="dossier-section">
+            <h3 class="dossier-section-title">Contact & Communication Channels</h3>
+            <div class="dossier-contact-card">
+              <div class="contact-item-row">
+                <span class="contact-label">Advocacy:</span>
+                <span class="contact-val">Pediatric Neurological Rare Disease & Medical AI Forums</span>
+              </div>
+              <div class="contact-item-row">
+                <span class="contact-label">Clinical Partner:</span>
+                <span class="contact-val">Dr. Holly Gilmer, MD (Beaumont Children's Hospital)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="openscience-dossier-box">
+            <h4>Explore on OpenScience (openscience.sh)</h4>
+            <p>Using <a href="https://www.openscience.sh/" target="_blank" rel="noopener" style="color: var(--accent-science); text-decoration: underline; font-weight: 600;">OpenScience</a>, patients and clinicians can ingest dense multi-page medical records into a local, privacy-preserving workspace to generate structured differential hypotheses without sharing confidential medical charts with commercial cloud providers.</p>
+          </div>
+        `
+      },
+
+      fajgenbaum: {
+        id: "fajgenbaum",
+        meta: "Translational Medicine · Proteomic AI & Drug Repurposing",
+        name: "Dr. David Fajgenbaum, MD, MBA, MSc",
+        subject: "Himself & Castleman Disease Community",
+        condition: "Idiopathic Multicentric Castleman Disease (iMCD Cytokine Storm)",
+        subjectImg: "https://davidfajgenbaum.com/wp-content/uploads/2025/08/dr-fajgenbaum.webp",
+        subjectCaption: "Authentic Photograph: Dr. David Fajgenbaum in his laboratory at the University of Pennsylvania",
+        sciCaption: "Interactive 3D model of mTOR kinase catalytic domain (target of Sirolimus / Rapamycin)",
+        molType: "mtor",
+        eli10: "David was a healthy doctor who suddenly got so sick his liver and kidneys shut down five times. Doctors had no more medicine to try. Instead of giving up, David kept frozen drops of his own blood and ran computer programs to track the cellular text messages. He spotted a tiny biological power-switch called mTOR that was going crazy. He found an old pill from 1999 that turns that switch off, took it, saved his life, and now built an AI to check every pill in the world against every disease!",
+        contacts: {
+          email: "davidfa@pennmedicine.upenn.edu / info@everycure.org",
+          linkedin: "https://www.linkedin.com/in/davidfajgenbaum/",
+          twitter: "https://x.com/DavidFajgenbaum",
+          platform: "https://everycure.org (Every Cure)",
+          portal: "https://davidfajgenbaum.com"
+        },
+        scientificBreakdown: `
+          <div class="dossier-section">
+            <h3 class="dossier-section-title">The Pathophysiology of Idiopathic Multicentric Castleman Disease</h3>
+            <p>iMCD is a deadly lymphoproliferative disorder characterized by hypercytokinemia (cytokine storm), generalized lymphadenopathy, organomegaly, fluid retention, and multi-organ failure. When anti-IL-6 therapy (Siltuximab) and salvage chemotherapy failed to halt life-threatening relapses, Dr. Fajgenbaum was given last rites five times.</p>
+          </div>
+
+          <div class="dossier-section">
+            <h3 class="dossier-section-title">Longitudinal Proteomics & Target Identification</h3>
+            <p>Fajgenbaum systematically drew, processed, and banked his own serum and peripheral blood mononuclear cells (PBMCs) throughout health, early prodrome, and acute crisis phases:</p>
+            <div class="pipeline-grid">
+              <div class="pipeline-step">
+                <div class="step-num">1. Multiplex Assay</div>
+                <div class="step-title">Serum Proteomics</div>
+                <div class="step-desc">Quantified 48 cytokines and chemokines longitudinally. Observed synchronized surges in VEGF and soluble IL-2 receptor (sIL-2R).</div>
+              </div>
+              <div class="pipeline-step">
+                <div class="step-num">2. Flow Cytometry</div>
+                <div class="step-title">T-Cell Activation</div>
+                <div class="step-desc">Demonstrated significant expansion of activated CD8+ T lymphocytes preceding clinical symptom onset.</div>
+              </div>
+              <div class="pipeline-step">
+                <div class="step-num">3. Pathway Tracing</div>
+                <div class="step-title">mTORC1 Signaling</div>
+                <div class="step-desc">Identified that VEGF and T-cell proliferation converged on the PI3K/Akt/mTOR pathway, confirmed via phosphorylated S6 ribosomal protein (pS6).</div>
+              </div>
+              <div class="pipeline-step">
+                <div class="step-num">4. Drug Repurposing</div>
+                <div class="step-title">Sirolimus Selection</div>
+                <div class="step-desc">Selected Sirolimus (Rapamycin), an off-patent generic immunosuppressant approved in 1999, to inhibit mTOR. Commenced self-administration in 2014; remains in continuous remission over 11 years later.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dossier-section">
+            <h3 class="dossier-section-title">Scaling to Every Cure: Knowledge Graph AI</h3>
+            <p>Fajgenbaum co-founded <strong>Every Cure</strong>, an AI-driven nonprofit backed by ARPA-H ($48M) and the TED Audacious Project. The Every Cure engine uses Graph Neural Networks (GNNs) and Natural Language Processing across 35 million PubMed articles to score every one of the ~4,000 FDA-approved drugs against ~18,000 human diseases, uncovering life-saving repurposing opportunities.</p>
+          </div>
+
+          <div class="dossier-section">
+            <h3 class="dossier-section-title">Peer-Reviewed Publications & Platforms</h3>
+            <table class="links-table">
+              <thead>
+                <tr>
+                  <th>Publication / Portal</th>
+                  <th>Journal / Entity</th>
+                  <th>Direct Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Every Cure Official Platform</td>
+                  <td>AI Repurposing Engine</td>
+                  <td><a href="https://everycure.org" target="_blank" rel="noopener">everycure.org ↗</a></td>
+                </tr>
+                <tr>
+                  <td>Identification of mTOR signaling in Castleman Disease</td>
+                  <td>The Lancet Haematology (2019)</td>
+                  <td><a href="https://www.thelancet.com/journals/lanhae/article/PIIS2352-3026(19)30145-2/fulltext" target="_blank" rel="noopener">doi.org/10.1016/S2352-3026(19)30145-2 ↗</a></td>
+                </tr>
+                <tr>
+                  <td>Castleman Disease Collaborative Network</td>
+                  <td>Patient-Centric Research Group</td>
+                  <td><a href="https://cdcn.org" target="_blank" rel="noopener">cdcn.org ↗</a></td>
+                </tr>
+                <tr>
+                  <td>Chasing My Cure (Memoir)</td>
+                  <td>Book & Educational Archive</td>
+                  <td><a href="https://davidfajgenbaum.com" target="_blank" rel="noopener">davidfajgenbaum.com ↗</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="dossier-section">
+            <h3 class="dossier-section-title">Contact & Communication Channels</h3>
+            <div class="dossier-contact-card">
+              <div class="contact-item-row">
+                <span class="contact-label">Email:</span>
+                <span class="contact-val">info@everycure.org / davidfa@pennmedicine.upenn.edu</span>
+              </div>
+              <div class="contact-item-row">
+                <span class="contact-label">LinkedIn:</span>
+                <span class="contact-val"><a href="https://www.linkedin.com/in/davidfajgenbaum/" target="_blank" rel="noopener">linkedin.com/in/davidfajgenbaum ↗</a></span>
+              </div>
+              <div class="contact-item-row">
+                <span class="contact-label">X / Twitter:</span>
+                <span class="contact-val"><a href="https://x.com/DavidFajgenbaum" target="_blank" rel="noopener">@DavidFajgenbaum ↗</a></span>
+              </div>
+              <div class="contact-item-row">
+                <span class="contact-label">Lab Portal:</span>
+                <span class="contact-val"><a href="https://everycure.org" target="_blank" rel="noopener">everycure.org ↗</a></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="openscience-dossier-box">
+            <h4>Explore on OpenScience (openscience.sh)</h4>
+            <p>Using <a href="https://www.openscience.sh/" target="_blank" rel="noopener" style="color: var(--accent-science); text-decoration: underline; font-weight: 600;">OpenScience</a>, researchers can query PubMed, extract protein-disease interactions, and write graph algorithms to score off-label drug repurposing candidates directly from their desktop.</p>
+          </div>
+        `
+      },
+
+      might: {
+        id: "might",
+        meta: "Rare Disease Discovery · Relational AI & Knowledge Graphs",
+        name: "Dr. Matt Might, PhD",
+        subject: "Bertrand Might & Undiagnosed Rare Disease Families",
+        condition: "NGLY1 Deficiency (Congenital Disorder of Deglycosylation)",
+        subjectImg: "https://www.uab.edu/medicine/pmi/images/img_matt-might-lg.jpg",
+        subjectCaption: "Authentic Photograph: Dr. Matt Might, Director of the Hugh Kaul Precision Medicine Institute, UAB",
+        sciCaption: "Interactive 3D model of NGLY1 peptide:N-glycanase enzymatic structure",
+        molType: "ngly1",
+        eli10: "Bertrand was born with a mystery illness so rare that no doctor in history had ever seen it before. He couldn't walk, talk, and he couldn't even cry real tears when he was sad. His dad was a computer scientist who wrote computer code to inspect every one of the 3 billion letters in his son's DNA book. He found a single broken word called NGLY1. Then he built a super-smart AI named mediKanren that could read every medical paper ever printed. The AI solved the riddle and showed that a simple sugar supplement could give Bertrand his very first tears!",
+        contacts: {
+          email: "might@uab.edu / pmi@uabmc.edu",
+          linkedin: "https://www.linkedin.com/in/mattmight/",
+          twitter: "https://x.com/mattmight",
+          portal: "https://matt.might.net",
+          institute: "https://www.uab.edu/medicine/pmi/"
+        },
+        scientificBreakdown: `
+          <div class="dossier-section">
+            <h3 class="dossier-section-title">The First Human Case of NGLY1 Deficiency</h3>
+            <p>Bertrand Might was born with severe global developmental delay, intractable choreiform seizures, involuntary movement disorders, and an enigmatic hallmark: complete absence of tear production (alacrima). For years, medical genetics had no diagnosis.</p>
+          </div>
+
+          <div class="dossier-section">
+            <h3 class="dossier-section-title">Algorithmic Exome Filtering & mediKanren AI</h3>
+            <p>Matt Might, a professor of computer science, applied algorithmic filtering to trio whole-exome sequencing (WES) data from Bertrand and his parents. He identified compound heterozygous nonsense mutations in the <em>NGLY1</em> gene, encoding peptide:N-glycanase 1—marking the first documented case in human history.</p>
+            <div class="pipeline-grid">
+              <div class="pipeline-step">
+                <div class="step-num">Phase 1</div>
+                <div class="step-title">Patient Aggregation</div>
+                <div class="step-desc">Wrote an algorithmically search-optimized blog post titled <em>"Hunting Down My Son's Killer"</em> which ranked #1 on Google for key phenotype strings, assembling the first international patient cohort.</div>
+              </div>
+              <div class="pipeline-step">
+                <div class="step-num">Phase 2</div>
+                <div class="step-title">mediKanren Logic Engine</div>
+                <div class="step-desc">Built <strong>mediKanren</strong> (leveraging relational programming language miniKanren) to query massive biomedical knowledge graphs and infer multi-hop mechanistic chains.</div>
+              </div>
+              <div class="pipeline-step">
+                <div class="step-num">Phase 3</div>
+                <div class="step-title">Therapeutic Hypothesis</div>
+                <div class="step-desc">The AI reasoned that NGLY1 deficiency caused an intracellular deficit of free N-acetylglucosamine (GlcNAc). Oral supplementation with over-the-counter GlcNAc restored Bertrand's ability to weep tears for the first time in his life.</div>
+              </div>
+              <div class="pipeline-step">
+                <div class="step-num">Phase 4</div>
+                <div class="step-title">UAB Precision Medicine</div>
+                <div class="step-desc">Appointed by President Obama to the White House Precision Medicine Initiative; now directs the Hugh Kaul Precision Medicine Institute at UAB, aiding hundreds of rare disease patients annually.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dossier-section">
+            <h3 class="dossier-section-title">Software Repositories & Scientific Publications</h3>
+            <table class="links-table">
+              <thead>
+                <tr>
+                  <th>Platform / Artifact</th>
+                  <th>Type</th>
+                  <th>Direct Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>mediKanren GitHub</td>
+                  <td>Open Source AI Logic Engine</td>
+                  <td><a href="https://github.com/webyrd/mediKanren" target="_blank" rel="noopener">github.com/webyrd/mediKanren ↗</a></td>
+                </tr>
+                <tr>
+                  <td>UAB Hugh Kaul Precision Medicine Institute</td>
+                  <td>Clinical Research Institute</td>
+                  <td><a href="https://www.uab.edu/medicine/pmi/" target="_blank" rel="noopener">uab.edu/medicine/pmi ↗</a></td>
+                </tr>
+                <tr>
+                  <td>Science Publication</td>
+                  <td>Discovery Article</td>
+                  <td><a href="https://science.org" target="_blank" rel="noopener">Science Magazine Feature ↗</a></td>
+                </tr>
+                <tr>
+                  <td>"Hunting Down My Son's Killer"</td>
+                  <td>Original Viral Case Study</td>
+                  <td><a href="https://matt.might.net/articles/my-baby-bertrand/" target="_blank" rel="noopener">matt.might.net/articles/my-baby-bertrand ↗</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="dossier-section">
+            <h3 class="dossier-section-title">Contact & Communication Channels</h3>
+            <div class="dossier-contact-card">
+              <div class="contact-item-row">
+                <span class="contact-label">Email:</span>
+                <span class="contact-val">might@uab.edu / pmi@uabmc.edu</span>
+              </div>
+              <div class="contact-item-row">
+                <span class="contact-label">Website:</span>
+                <span class="contact-val"><a href="https://matt.might.net" target="_blank" rel="noopener">matt.might.net ↗</a></span>
+              </div>
+              <div class="contact-item-row">
+                <span class="contact-label">LinkedIn:</span>
+                <span class="contact-val"><a href="https://www.linkedin.com/in/mattmight/" target="_blank" rel="noopener">linkedin.com/in/mattmight ↗</a></span>
+              </div>
+              <div class="contact-item-row">
+                <span class="contact-label">X / Twitter:</span>
+                <span class="contact-val"><a href="https://x.com/mattmight" target="_blank" rel="noopener">@mattmight ↗</a></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="openscience-dossier-box">
+            <h4>Explore on OpenScience (openscience.sh)</h4>
+            <p>Using <a href="https://www.openscience.sh/" target="_blank" rel="noopener" style="color: var(--accent-science); text-decoration: underline; font-weight: 600;">OpenScience</a>, you can run automated Python and miniKanren reasoning queries across biomedical knowledge graphs to deduce chemical-protein relationships directly in your local environment.</p>
+          </div>
+        `
+      },
+
+      viles: {
+        id: "viles",
+        meta: "Phenotypic Discovery · Computational Genomic Alignment",
+        name: "Jill Viles",
+        subject: "Herself & Priscilla Lopes-Schliep (Olympic Hurdler)",
+        condition: "LMNA Mutation (Emery-Dreifuss Dystrophy vs Muscular Hypertrophy)",
+        subjectImg: "https://assets-c3.propublica.org/legacy/images/20160115-genetic-mystery-1200x630.jpg",
+        subjectCaption: "Authentic Photograph: Jill Viles and Canadian Olympic medalist Priscilla Lopes-Schliep (ProPublica)",
+        sciCaption: "Interactive 3D model of Lamin A/C nuclear envelope structural protein",
+        molType: "lmna",
+        eli10: "Jill had a rare condition that made her muscles wither away until she needed a wheelchair. But while watching the Olympic Games on television, she noticed a Canadian hurdler who had giant, powerful muscles and no fat at all. Jill used genetic research databases and guessed they shared the exact same rare genetic switch in their bodies—one turned up high, one turned down low! Scientists tested their DNA, and Jill was proven 100% right! It showed scientists how our genetic switches control muscle and fat!",
+        contacts: {
+          email: "Via Rare Disease Patient Advocacy & This American Life archives",
+          archive: "https://www.thisamericanlife.org/577/something-only-i-can-see",
+          lab: "Johns Hopkins Medicine Neuromuscular Genetics"
+        },
+        scientificBreakdown: `
+          <div class="dossier-section">
+            <h3 class="dossier-section-title">The Phenotypic Mystery of the LMNA Gene</h3>
+            <p>Jill Viles developed progressive muscle wasting during childhood, losing the ability to walk unassisted. Suspecting that her condition was not ordinary limb-girdle dystrophy, she spent years in medical libraries and online genomic databases (NCBI GenBank, BLAST, and OMIM). She correctly self-diagnosed Emery-Dreifuss muscular dystrophy and Dunnigan-type familial partial lipodystrophy caused by a mutation in the <em>LMNA</em> gene.</p>
+          </div>
+
+          <div class="dossier-section">
+            <h3 class="dossier-section-title">Visual Pattern Recognition to Genetic Confirmation</h3>
+            <p>While watching the 2008 Beijing Olympics, Jill noticed Canadian bronze medalist 100m hurdler Priscilla Lopes-Schliep. She observed that Priscilla possessed extreme musculature, prominent veins, and a complete lack of subcutaneous adipose tissue on her extremities—the exact photographic inverse of Jill's own severe lipodystrophy.</p>
+            <div class="pipeline-grid">
+              <div class="pipeline-step">
+                <div class="step-num">Step 1</div>
+                <div class="step-title">Hypothesis Formulation</div>
+                <div class="step-desc">Hypothesized that Priscilla carried an allelic variant of the same <em>LMNA</em> gene that caused partial lipodystrophy without triggering the degenerative muscle wasting of Emery-Dreifuss.</div>
+              </div>
+              <div class="pipeline-step">
+                <div class="step-num">Step 2</div>
+                <div class="step-title">Geneticist Partnership</div>
+                <div class="step-desc">Reached out to Dr. Gordon Bond and neuromuscular specialists at <strong>Johns Hopkins University</strong>, who sequenced Priscilla's genome with her consent.</div>
+              </div>
+              <div class="pipeline-step">
+                <div class="step-num">Step 3</div>
+                <div class="step-title">Genotypic Confirmation</div>
+                <div class="step-desc">Sequencing confirmed that Priscilla possessed a rare missense mutation in <em>LMNA</em>, confirming Jill's hypothesis and revealing new molecular mechanisms regulating adipocyte storage and muscle hypertrophy.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dossier-section">
+            <h3 class="dossier-section-title">Media & Scientific Documentation</h3>
+            <table class="links-table">
+              <thead>
+                <tr>
+                  <th>Platform</th>
+                  <th>Reference</th>
+                  <th>Direct Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>This American Life</td>
+                  <td>Episode 577: "Something Only I Can See"</td>
+                  <td><a href="https://www.thisamericanlife.org/577/something-only-i-can-see" target="_blank" rel="noopener">thisamericanlife.org/577 ↗</a></td>
+                </tr>
+                <tr>
+                  <td>Johns Hopkins Research</td>
+                  <td>Genetics Clinical Archives</td>
+                  <td><a href="https://www.hopkinsmedicine.org/" target="_blank" rel="noopener">hopkinsmedicine.org ↗</a></td>
+                </tr>
+                <tr>
+                  <td>NCBI GenBank & OMIM</td>
+                  <td>LMNA Gene Database</td>
+                  <td><a href="https://www.ncbi.nlm.nih.gov/gene/4000" target="_blank" rel="noopener">NCBI LMNA Entry ↗</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="openscience-dossier-box">
+            <h4>Explore on OpenScience (openscience.sh)</h4>
+            <p>Using <a href="https://www.openscience.sh/" target="_blank" rel="noopener" style="color: var(--accent-science); text-decoration: underline; font-weight: 600;">OpenScience</a>, independent researchers can perform sequence alignment and motif comparisons to evaluate how missense mutations alter protein tertiary structure and biological function.</p>
+          </div>
+        `
+      },
+
+      colabfold: {
+        id: "colabfold",
+        meta: "Democratized Structural Biology · Fast Multiple Sequence Alignment",
+        name: "Dr. Sergey Ovchinnikov & Dr. Martin Steinegger",
+        subject: "Empowering Citizen Scientists & Independent Researchers",
+        condition: "AlphaFold 2 & ESMFold Democratization (30-100x Speedup on Free Cloud GPUs)",
+        subjectImg: "https://avatars.githubusercontent.com/u/6225586?v=4",
+        subjectCaption: "Authentic Profile: Dr. Sergey Ovchinnikov (sokrypton, Harvard / MIT)",
+        sciCaption: "Interactive 3D model: AlphaFold multimer protein complex",
+        molType: "colab",
+        eli10: "Proteins are like tiny origami machines inside our bodies that do all the work to keep you alive. When an AI was invented to predict how they fold, you needed a giant million-dollar supercomputer in a university basement to run it. Sergey and Martin built a free tool called ColabFold so anyone in the world—even a parent at home on a laptop—can see the 3D origami of a broken protein in minutes for free!",
+        contacts: {
+          sergey_x: "https://x.com/sokrypton",
+          martin_x: "https://x.com/thesteinegger",
+          github: "https://github.com/sokrypton/ColabFold",
+          lab: "MIT / Seoul National University"
+        },
+        scientificBreakdown: `
+          <div class="dossier-section">
+            <h3 class="dossier-section-title">The Problem with Native AlphaFold 2</h3>
+            <p>When DeepMind published AlphaFold 2 in 2021, running the software required high-performance workstation clusters, petabyte-scale genetic databases (UniRef90, BFD, MGnify), and hours of compute per protein. This created a barrier that excluded patient advocates, independent researchers, and labs in developing nations.</p>
+          </div>
+
+          <div class="dossier-section">
+            <h3 class="dossier-section-title">The ColabFold Breakthrough: MMseqs2 + Free Web GPUs</h3>
+            <p>Dr. Sergey Ovchinnikov (Harvard/MIT) and Dr. Martin Steinegger (Seoul National University) developed <strong>ColabFold</strong>. By replacing the computationally heavy Jackhmmer MSA search with the ultra-fast <strong>MMseqs2</strong> server API, they reduced Multiple Sequence Alignment runtime from hours to mere seconds.</p>
+            <div class="pipeline-grid">
+              <div class="pipeline-step">
+                <div class="step-num">Speedup</div>
+                <div class="step-title">30–100x Faster</div>
+                <div class="step-desc">Allows prediction of protein tertiary structures and protein-protein complexes (AlphaFold-Multimer) in 2–5 minutes.</div>
+              </div>
+              <div class="pipeline-step">
+                <div class="step-num">Accessibility</div>
+                <div class="step-title">Free Google Colab</div>
+                <div class="step-desc">Runs entirely within standard browser tabs on free GPU instances, requiring zero local software installation.</div>
+              </div>
+              <div class="pipeline-step">
+                <div class="step-num">Citizen Impact</div>
+                <div class="step-title">Enabled Rosie's Vaccine</div>
+                <div class="step-desc">Enabled Paul Conyngham to model mutated canine neoantigens and predict folding stability from his home computer without institutional supercomputing grants.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dossier-section">
+            <h3 class="dossier-section-title">Code Repositories & Nature Methods Paper</h3>
+            <table class="links-table">
+              <thead>
+                <tr>
+                  <th>Platform / Artifact</th>
+                  <th>Metric</th>
+                  <th>Direct Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>ColabFold GitHub</td>
+                  <td>4,500+ Stars, Open Source</td>
+                  <td><a href="https://github.com/sokrypton/ColabFold" target="_blank" rel="noopener">github.com/sokrypton/ColabFold ↗</a></td>
+                </tr>
+                <tr>
+                  <td>Nature Methods Publication</td>
+                  <td>Peer-Reviewed Paper (2022)</td>
+                  <td><a href="https://www.nature.com/articles/s41592-022-01488-1" target="_blank" rel="noopener">doi.org/10.1038/s41592-022-01488-1 ↗</a></td>
+                </tr>
+                <tr>
+                  <td>Google Colab Notebook</td>
+                  <td>Live Interactive Tool</td>
+                  <td><a href="https://colab.research.google.com/github/sokrypton/ColabFold/blob/main/AlphaFold2.ipynb" target="_blank" rel="noopener">Launch AlphaFold2 in Colab ↗</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="dossier-section">
+            <h3 class="dossier-section-title">Contact & Communication Channels</h3>
+            <div class="dossier-contact-card">
+              <div class="contact-item-row">
+                <span class="contact-label">Dr. Sergey Ovchinnikov:</span>
+                <span class="contact-val"><a href="https://x.com/sokrypton" target="_blank" rel="noopener">@sokrypton on X ↗</a> | MIT</span>
+              </div>
+              <div class="contact-item-row">
+                <span class="contact-label">Dr. Martin Steinegger:</span>
+                <span class="contact-val"><a href="https://x.com/thesteinegger" target="_blank" rel="noopener">@thesteinegger on X ↗</a> | Seoul National University</span>
+              </div>
+              <div class="contact-item-row">
+                <span class="contact-label">Code Repository:</span>
+                <span class="contact-val"><a href="https://github.com/sokrypton/ColabFold" target="_blank" rel="noopener">github.com/sokrypton/ColabFold ↗</a></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="openscience-dossier-box">
+            <h4>Explore on OpenScience (openscience.sh)</h4>
+            <p>On <a href="https://www.openscience.sh/" target="_blank" rel="noopener" style="color: var(--accent-science); text-decoration: underline; font-weight: 600;">OpenScience</a>, the workbench natively connects structural prediction pipelines, enabling local residue analysis, PDB visualization, and chemical docking scripts in a single unified research environment.</p>
+          </div>
+        `
+      }
+    };
+
+    // -------------------------------------------------------------
+    // Full Page View Router
+    // -------------------------------------------------------------
+    const directoryView = document.getElementById('directoryView');
+    const fullPageView = document.getElementById('fullPageView');
+    const fullpageContent = document.getElementById('fullpageContent');
+    const fullpageBreadcrumb = document.getElementById('fullpageBreadcrumb');
+
+    function openFullPage(pioneerKey) {
+      const data = pioneerDossiers[pioneerKey];
+      if (!data) return;
+
+      fullpageBreadcrumb.textContent = `OpenScience / Pioneers / ${data.name}`;
+
+      fullpageContent.innerHTML = `
+        <div class="fullpage-hero">
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-science); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem;">
+            ${data.meta}
+          </div>
+          <h1 class="fullpage-title">${data.name}</h1>
+          <div class="fullpage-subtitle">${data.subject} · <span style="font-weight: 600; color: var(--text-fg);">${data.condition}</span></div>
+        </div>
+
+        <!-- Authentic Photo & 3D Interactive Discovery Row -->
+        <div class="fullpage-visual-grid">
+          <div class="fullpage-img-card">
+            <img src="${data.subjectImg}" alt="${data.name}" />
+            <div class="img-card-caption">
+              <strong>Authentic Record:</strong> ${data.subjectCaption}
+            </div>
+          </div>
+          <div class="fullpage-mol-card">
+            <canvas class="mol-canvas" id="canvas-fullpage-mol" data-mol-type="${data.molType}"></canvas>
+            <div class="img-card-caption">
+              <strong>Scientific Discovery:</strong> ${data.sciCaption} (Drag to rotate in 3D)
+            </div>
+          </div>
+        </div>
+
+        <!-- Distinct Section: Plain-English Concept Explained to a 10-Year-Old -->
+        <div class="eli10-dossier-card">
+          <div class="eli10-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+            § 1. Conceptual Breakdown (Explained to a 10-Year-Old)
+          </div>
+          <p class="eli10-body-text">${data.eli10}</p>
+        </div>
+
+        <!-- Distinct Section: Deep Scientific Dossier & Molecular Pipeline -->
+        <div style="margin-top: 1rem;">
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-science); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem;">
+            Technical Methodology
+          </div>
+          <h2 style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 400; margin-bottom: 1.5rem;">
+            § 2. In-Depth Scientific Methodology & Molecular Biology
+          </h2>
+        </div>
+
+        ${data.scientificBreakdown}
+      `;
+
+      directoryView.style.display = 'none';
+      fullPageView.classList.add('active');
+      window.scrollTo(0, 0);
+
+      // Update URL hash
+      window.location.hash = `#${data.id}`;
+
+      // Initialize 3D molecular canvas on full page
+      setTimeout(() => {
+        const fullCanvas = document.getElementById('canvas-fullpage-mol');
+        if (fullCanvas) {
+          initThreeMolecule(fullCanvas, data.molType);
+        }
+      }, 50);
+    }
+
+    function closeFullPage() {
+      fullPageView.classList.remove('active');
+      directoryView.style.display = 'block';
+      window.location.hash = '';
+      window.scrollTo(0, 0);
+    }
+
+    // Handle browser back button (hashchange)
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (!hash) {
+        if (fullPageView.classList.contains('active')) {
+          closeFullPage();
+        }
+      } else if (pioneerDossiers[hash]) {
+        openFullPage(hash);
+      }
+    });
+
+    // Check on load if hash exists
+    document.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && pioneerDossiers[hash]) {
+        openFullPage(hash);
+      }
+    });
+
+    // -------------------------------------------------------------
+    // Media Slide Switching on Directory Cards (Photo <-> 3D Molecule)
+    // -------------------------------------------------------------
+    function switchMedia(cardIndex, targetType, btnEl) {
+      const parentCard = btnEl.closest('.pioneer-card');
+      const slideSubject = parentCard.querySelector('.slide-subject');
+      const slideMolecule = parentCard.querySelector('.slide-molecule');
+      const hint = parentCard.querySelector('.mol-hint');
+      const buttons = parentCard.querySelectorAll('.media-pill-btn');
+
+      buttons.forEach(b => b.classList.remove('active'));
+      btnEl.classList.add('active');
+
+      if (targetType === 'molecule') {
+        slideSubject.classList.remove('active');
+        slideMolecule.classList.add('active');
+        if (hint) hint.style.display = 'inline-flex';
+      } else {
+        slideMolecule.classList.remove('active');
+        slideSubject.classList.add('active');
+        if (hint) hint.style.display = 'none';
+      }
+    }
+
+    // -------------------------------------------------------------
+    // Category Filtering
+    // -------------------------------------------------------------
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const cards = document.querySelectorAll('.pioneer-card');
+
+    filterTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        filterTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        const filter = tab.getAttribute('data-filter');
+        cards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-category') === filter) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // -------------------------------------------------------------
+    // Clipboard Copy Helper
+    // -------------------------------------------------------------
+    function copyTemplate(elementId) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      navigator.clipboard.writeText(el.innerText).then(() => {
+        alert("Outreach template copied to clipboard!");
+      }).catch(err => {
+        console.error("Failed to copy:", err);
+      });
+    }
+
+    // -------------------------------------------------------------
+    // Three.js 3D Interactive Protein Ribbon Visualizer
+    // -------------------------------------------------------------
+    function initThreeMolecule(canvas, molType) {
+      if (!canvas || !window.THREE) return;
+
+      const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(canvas.clientWidth || 380, canvas.clientHeight || 250);
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, (canvas.clientWidth || 380) / (canvas.clientHeight || 250), 0.1, 1000);
+      camera.position.z = 28;
+
+      // Lighting
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+      scene.add(ambientLight);
+
+      const dirLight1 = new THREE.DirectionalLight(0xffffff, 0.85);
+      dirLight1.position.set(10, 20, 15);
+      scene.add(dirLight1);
+
+      const dirLight2 = new THREE.DirectionalLight(0x1a6a6e, 0.55);
+      dirLight2.position.set(-15, -10, -10);
+      scene.add(dirLight2);
+
+      // Create synthetic protein ribbon / helical structure
+      const molGroup = new THREE.Group();
+      scene.add(molGroup);
+
+      // Helix / Alpha-helix generation
+      const points = [];
+      const numPoints = 120;
+      const radius = 3.2;
+      const pitch = 0.22;
+
+      for (let i = 0; i < numPoints; i++) {
+        const theta = i * 0.45;
+        const x = Math.sin(theta) * radius + Math.sin(i * 0.1) * 2.0;
+        const y = (i - numPoints / 2) * pitch;
+        const z = Math.cos(theta) * radius + Math.cos(i * 0.12) * 1.5;
+        points.push(new THREE.Vector3(x, y, z));
+      }
+
+      const curve = new THREE.CatmullRomCurve3(points);
+      const tubeGeo = new THREE.TubeGeometry(curve, 90, 0.45, 12, false);
+
+      // Colors per molecule type
+      let molColor = 0x1a6a6e;
+      if (molType === 'kinase') molColor = 0x3d7068;
+      if (molType === 'spine') molColor = 0x6e5223;
+      if (molType === 'mtor') molColor = 0x7a2240;
+      if (molType === 'ngly1') molColor = 0x272b62;
+      if (molType === 'lmna') molColor = 0x5c4228;
+      if (molType === 'colab') molColor = 0x1a6a6e;
+
+      const tubeMat = new THREE.MeshStandardMaterial({
+        color: molColor,
+        roughness: 0.35,
+        metalness: 0.15,
+        wireframe: false
+      });
+      const tubeMesh = new THREE.Mesh(tubeGeo, tubeMat);
+      molGroup.add(tubeMesh);
+
+      // Add amino acid spheres / residue atoms
+      const sphereGeo = new THREE.SphereGeometry(0.35, 14, 14);
+      const residueMat = new THREE.MeshStandardMaterial({ color: 0xd9cbb2, roughness: 0.2 });
+      const activePocketMat = new THREE.MeshStandardMaterial({ color: 0xe65100, roughness: 0.2, emissive: 0x331000 });
+
+      for (let j = 0; j < points.length; j += 4) {
+        const isPocket = (j > 45 && j < 65);
+        const atomMesh = new THREE.Mesh(sphereGeo, isPocket ? activePocketMat : residueMat);
+        atomMesh.position.copy(points[j]);
+        molGroup.add(atomMesh);
+      }
+
+      // Drag to rotate controls
+      let isDragging = false;
+      let prevMousePos = { x: 0, y: 0 };
+
+      canvas.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        prevMousePos = { x: e.clientX, y: e.clientY };
+      });
+
+      window.addEventListener('mouseup', () => {
+        isDragging = false;
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const deltaX = e.clientX - prevMousePos.x;
+        const deltaY = e.clientY - prevMousePos.y;
+        molGroup.rotation.y += deltaX * 0.01;
+        molGroup.rotation.x += deltaY * 0.01;
+        prevMousePos = { x: e.clientX, y: e.clientY };
+      });
+
+      // Touch controls
+      canvas.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+          isDragging = true;
+          prevMousePos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        }
+      });
+      window.addEventListener('touchend', () => { isDragging = false; });
+      canvas.addEventListener('touchmove', (e) => {
+        if (!isDragging || e.touches.length !== 1) return;
+        const deltaX = e.touches[0].clientX - prevMousePos.x;
+        const deltaY = e.touches[0].clientY - prevMousePos.y;
+        molGroup.rotation.y += deltaX * 0.01;
+        molGroup.rotation.x += deltaY * 0.01;
+        prevMousePos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      });
+
+      // Animation loop
+      function animate() {
+        requestAnimationFrame(animate);
+        if (!isDragging) {
+          molGroup.rotation.y += 0.006;
+          molGroup.rotation.x += 0.002;
+        }
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      // Window resize handler
+      function handleResize() {
+        if (!canvas.parentElement) return;
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+      }
+      window.addEventListener('resize', handleResize);
+    }
+
+    // Initialize 3D Mol Viewers on cards when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.mol-canvas').forEach(canvas => {
+        if (canvas.id !== 'canvas-fullpage-mol') {
+          const molType = canvas.getAttribute('data-mol-type') || 'kinase';
+          initThreeMolecule(canvas, molType);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
